@@ -18,7 +18,7 @@ const getRandomFloatRange = function (from, to, count) {
     return;
   }
 
-  return (Math.random() * (to - from) + from).toFixed(count);
+  return Number((Math.random() * (to - from) + from).toFixed(count));
 };
 
 getRandomFloatRange(1.2, 3.4, 2);
