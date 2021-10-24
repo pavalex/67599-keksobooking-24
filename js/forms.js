@@ -8,6 +8,10 @@ const mapFiltresDisabled = mapFiltres.querySelectorAll('.map__filter');
 const mapFeatures = mapFiltres.querySelector('.map__features');
 const capacitySelect = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');
+const typeSelect = adForm.querySelector('#type');
+const priceSelect = adForm.querySelector('#price');
+const timeInSelect = adForm.querySelector('#timein');
+const timeOutSelect = adForm.querySelector('#timeout');
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -109,6 +113,34 @@ const onRoomsNumberSelect = () => {
 };
 
 roomNumber.addEventListener('change', onRoomsNumberSelect);
+
+// Валидация тип жилья
+const minPriceHousing = {
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel': 3000,
+  'house': 5000,
+  'palace': 10000,
+};
+
+const onTypeOfHousingChange = () => {
+  priceSelect.placeholder = minPriceHousing[typeSelect.value];
+  priceSelect.min = minPriceHousing[typeSelect.value];
+};
+
+typeSelect.addEventListener('change', onTypeOfHousingChange);
+
+// Валидация время заезда-время выезда
+const onTimeInChange = () => {
+  timeOutSelect.value = timeInSelect.value;
+};
+
+const onTimeOutChange = () => {
+  timeInSelect.value = timeOutSelect.value;
+};
+
+timeInSelect.addEventListener('change', onTimeInChange);
+timeOutSelect.addEventListener('change', onTimeOutChange);
 
 buttonSendForm.addEventListener('click', onTitleInput, onPriceInput, onRoomsNumberSelect);
 
