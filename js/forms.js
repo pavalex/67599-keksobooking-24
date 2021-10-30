@@ -1,3 +1,8 @@
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+const MAX_PRICE = 1000000;
+const COORDINATE_ROUNDING = 5;
+
 const adForm = document.querySelector('.ad-form');
 const fieldsetDisabled = adForm.querySelectorAll('fieldset');
 const inputTitle = adForm.querySelector('#title');
@@ -13,11 +18,6 @@ const priceSelect = adForm.querySelector('#price');
 const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
 const addressArea = document.querySelector('#address');
-
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
-const MAX_PRICE = 1000000;
-const COORDINATE_ROUNDING = 5;
 
 // Неактивное состояние
 const getPageInactiveState = () => {
