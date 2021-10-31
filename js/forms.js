@@ -1,3 +1,8 @@
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+const MAX_PRICE = 1000000;
+const COORDINATE_ROUNDING = 5;
+
 const adForm = document.querySelector('.ad-form');
 const fieldsetDisabled = adForm.querySelectorAll('fieldset');
 const inputTitle = adForm.querySelector('#title');
@@ -12,10 +17,7 @@ const typeSelect = adForm.querySelector('#type');
 const priceSelect = adForm.querySelector('#price');
 const timeInSelect = adForm.querySelector('#timein');
 const timeOutSelect = adForm.querySelector('#timeout');
-
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
-const MAX_PRICE = 1000000;
+const addressArea = document.querySelector('#address');
 
 // Неактивное состояние
 const getPageInactiveState = () => {
@@ -50,7 +52,13 @@ const getPageActiveState = () => {
 };
 
 getPageInactiveState();
-getPageActiveState();
+
+// Выбор адреса на карте
+const addAddRess = (lat, lng) => {
+  const latitude = lat.toFixed(COORDINATE_ROUNDING);
+  const longitude = lng.toFixed(COORDINATE_ROUNDING);
+  addressArea.value = `${latitude}, ${longitude}`;
+};
 
 // Валидация заголовка объявления
 const onTitleInput = () => {
@@ -144,4 +152,5 @@ timeOutSelect.addEventListener('change', onTimeOutChange);
 
 buttonSendForm.addEventListener('click', onTitleInput, onPriceInput, onRoomsNumberSelect);
 
+export {getPageActiveState, addAddRess, addressArea};
 

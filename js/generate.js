@@ -1,11 +1,6 @@
-import {similarObjects} from './create-data-generation.js';
-
-const mapCanvas = document.querySelector('#map-canvas');
 const similarObjectsTemplate = document.querySelector('#card').content.querySelector('.popup');
-const generateObjects = similarObjects().slice(0,1);
-const similarCardFragment = document.createDocumentFragment();
 
-generateObjects.forEach(({offer, author}) => {
+const createPopup = ({offer, author}) => {
   const objectsElement = similarObjectsTemplate.cloneNode(true);
   const popupTitle = objectsElement.querySelector('.popup__title');
   const popupTextAddress = objectsElement.querySelector('.popup__text--address');
@@ -100,9 +95,7 @@ generateObjects.forEach(({offer, author}) => {
     popupAvatar.remove();
   }
 
-  similarCardFragment.appendChild(objectsElement);
-});
+  return objectsElement;
+};
 
-mapCanvas.appendChild(similarCardFragment);
-
-
+export {createPopup};
