@@ -1,5 +1,4 @@
 import {getPageActiveState, addAddRess, addressArea} from './forms.js';
-import {similarObjects} from './create-data-generation.js';
 import {createPopup} from './generate.js';
 
 const STARTING_LATITUDE = 35.6895;
@@ -7,6 +6,8 @@ const STARTING_LONGITUDE = 139.6921;
 const ZOOM = 10;
 const MAIN_ICON_SIZE = 52;
 const ICON_SIZE = 40;
+
+const markers = [];
 
 addressArea.value = `${STARTING_LATITUDE}, ${STARTING_LONGITUDE}`;
 
@@ -52,28 +53,46 @@ const onPinMove = (evt) => {
 
 mainPinMarker.on('moveend', onPinMove);
 
+const resetMainPinMarker = () => {
+  mainPinMarker.setLatLng(L.latLng(STARTING_LATITUDE, STARTING_LONGITUDE));
+  addressArea.value = `${STARTING_LATITUDE}, ${STARTING_LONGITUDE}`;
+};
+
 // Второстепенные маркеры и балун
 const markerGroup = L.layerGroup().addTo(map);
 
-similarObjects().forEach((point) => {
-  const {lat, lng} = point.location;
+const addPoints = (points) => {
+  points.forEach((point) => {
+    const {lat, lng} = point.location;
 
-  const icon = L.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [ICON_SIZE, ICON_SIZE],
-    iconAnchor: [ICON_SIZE / 2, ICON_SIZE],
-  });
-
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
+    const icon = L.icon({
+      iconUrl: 'img/pin.svg',
+      iconSize: [ICON_SIZE, ICON_SIZE],
+      iconAnchor: [ICON_SIZE / 2, ICON_SIZE],
     });
 
-  marker
-    .addTo(markerGroup)
-    .bindPopup(createPopup(point));
-});
+    const marker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon,
+      });
+
+    marker
+      .addTo(markerGroup)
+      .bindPopup(createPopup(point));
+    markers.push(marker);
+  });
+};
+
+const closePopupMapMarkers = () => {
+  markers.forEach((marker) => {
+    marker.closePopup();
+  });
+};
+
+export {addPoints, resetMainPinMarker, closePopupMapMarkers};
+
+
