@@ -1,13 +1,17 @@
+import {sendData} from './api.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
 const COORDINATE_ROUNDING = 5;
+const POST_URL = 'https://24.javascript.pages.academy/keksobooking';
 
 const adForm = document.querySelector('.ad-form');
 const fieldsetDisabled = adForm.querySelectorAll('fieldset');
 const inputTitle = adForm.querySelector('#title');
 const inputPrice = adForm.querySelector('#price');
 const buttonSendForm = adForm.querySelector('.ad-form__submit');
+const resetButton = adForm.querySelector('.ad-form__reset');
 const mapFiltres = document.querySelector('.map__filters');
 const mapFiltresDisabled = mapFiltres.querySelectorAll('.map__filter');
 const mapFeatures = mapFiltres.querySelector('.map__features');
@@ -152,5 +156,17 @@ timeOutSelect.addEventListener('change', onTimeOutChange);
 
 buttonSendForm.addEventListener('click', onTitleInput, onPriceInput, onRoomsNumberSelect);
 
-export {getPageActiveState, addAddRess, addressArea};
+// Отправить форму
+const setUserFormSubmit = (onSuccess, onFail) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
+    sendData(
+      POST_URL,
+      () => onSuccess(),
+      () => onFail(),
+      new FormData(evt.target));
+  });
+};
+
+export {getPageActiveState, addAddRess, addressArea, setUserFormSubmit, adForm, resetButton};
