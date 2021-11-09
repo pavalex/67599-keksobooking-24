@@ -12,9 +12,6 @@ const inputTitle = adForm.querySelector('#title');
 const inputPrice = adForm.querySelector('#price');
 const buttonSendForm = adForm.querySelector('.ad-form__submit');
 const resetButton = adForm.querySelector('.ad-form__reset');
-const mapFiltres = document.querySelector('.map__filters');
-const mapFiltresDisabled = mapFiltres.querySelectorAll('.map__filter');
-const mapFeatures = mapFiltres.querySelector('.map__features');
 const capacitySelect = adForm.querySelector('#capacity');
 const roomNumber = adForm.querySelector('#room_number');
 const typeSelect = adForm.querySelector('#type');
@@ -29,14 +26,6 @@ const getPageInactiveState = () => {
   fieldsetDisabled.forEach((fieldsetItem) => {
     fieldsetItem.setAttribute('disabled', true);
   });
-
-  mapFiltres.classList.add('ad-form--disabled');
-  mapFiltresDisabled.forEach((mapFilterItem) => {
-    mapFilterItem.setAttribute('disabled', true);
-  });
-
-  mapFeatures.classList.add('ad-form--disabled');
-  mapFeatures.setAttribute('disabled', true);
 };
 
 // Активное состояние
@@ -45,17 +34,7 @@ const getPageActiveState = () => {
   fieldsetDisabled.forEach((fieldsetItem) => {
     fieldsetItem.removeAttribute('disabled');
   });
-
-  mapFiltres.classList.remove('ad-form--disabled');
-  mapFiltresDisabled.forEach((mapFilterItem) => {
-    mapFilterItem.removeAttribute('disabled');
-  });
-
-  mapFeatures.classList.remove('ad-form--disabled');
-  mapFeatures.removeAttribute('disabled');
 };
-
-getPageInactiveState();
 
 // Выбор адреса на карте
 const addAddRess = (lat, lng) => {
@@ -169,4 +148,14 @@ const setUserFormSubmit = (onSuccess, onFail) => {
   });
 };
 
-export {getPageActiveState, addAddRess, addressArea, setUserFormSubmit, adForm, resetButton};
+export {
+  getPageActiveState,
+  getPageInactiveState,
+  addAddRess,
+  addressArea,
+  setUserFormSubmit,
+  adForm,
+  resetButton,
+  onTypeOfHousingChange,
+  onRoomsNumberSelect
+};

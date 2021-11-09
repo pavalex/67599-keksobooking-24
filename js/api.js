@@ -7,7 +7,7 @@ const getData = (url, onSuccess, onFail) => {
       onFail('Не удалось загрузить данные об объектах');
     }))
     .then((items) => {
-      onSuccess(items.slice(0, 10));
+      onSuccess(items);
     })
     .catch(() => {
       onFail('Не удалось загрузить данные об объектах');
@@ -33,4 +33,7 @@ const sendData = (url, onSuccess, onFail, body) => {
     });
 };
 
-export {getData, sendData};
+export {
+  getData,
+  sendData
+};
