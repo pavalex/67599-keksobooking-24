@@ -2,13 +2,15 @@ import './generate.js';
 import './forms.js';
 import './map.js';
 import './api.js';
+import './avatar.js';
 import {getData} from './api.js';
 import {addPoints, resetMainPinMarker, closePopupMapMarkers, removeMapMarkers} from './map.js';
-import {setUserFormSubmit, adForm, resetButton, onTypeOfHousingChange, onRoomsNumberSelect /* getPageInactiveState */} from './forms.js';
+import {setUserFormSubmit, adForm, resetButton, onTypeOfHousingChange, onRoomsNumberSelect} from './forms.js';
 import {showError} from './utils/show-error.js';
 import {showSuccessPopup, showErrorPopup} from './popus.js';
 import {mapFiltres, checkType, checkPrice, checkRooms, checkGuests, checkFeatures, activateFilter, deactivateFilter} from './filter.js';
 import {debounce} from './utils/debounce.js';
+import {clearAvatar, clearPhoto} from './avatar.js';
 
 const GET_URL = 'https://24.javascript.pages.academy/keksobooking/data';
 const RERENDER_DELAY = 500;
@@ -20,6 +22,8 @@ const setDefaults = () => {
   closePopupMapMarkers();
   onTypeOfHousingChange();
   onRoomsNumberSelect();
+  clearAvatar();
+  clearPhoto();
 };
 
 deactivateFilter();
