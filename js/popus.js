@@ -46,4 +46,7 @@ const showErrorPopup = () => {
   retryButton.addEventListener('click', onClick(errorPopup));
 };
 
-export {showErrorPopup, showSuccessPopup};
+export {
+  showErrorPopup,
+  showSuccessPopup
+};

@@ -82,9 +82,7 @@ const createPopup = ({offer, author}) => {
   }
 
   if (offer.photos) {
-    offer.photos.forEach((offerPhoto) => {
-      popupPhotos.querySelector('.popup__photo').src = offerPhoto;
-    });
+    popupPhotos.innerHTML = offer.photos.map((photo) => `<img src="${photo}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('');
   } else {
     popupPhotos.remove();
   }

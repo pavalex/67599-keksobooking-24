@@ -1,9 +1,8 @@
-import {getPageActiveState, addAddRess, addressArea} from './forms.js';
+import {getPageActiveState, addAddRess, addressArea, getPageInactiveState} from './forms.js';
 import {createPopup} from './generate.js';
-
 const STARTING_LATITUDE = 35.6895;
 const STARTING_LONGITUDE = 139.6921;
-const ZOOM = 10;
+const ZOOM = 12;
 const MAIN_ICON_SIZE = 52;
 const ICON_SIZE = 40;
 
@@ -11,9 +10,12 @@ const markers = [];
 
 addressArea.value = `${STARTING_LATITUDE}, ${STARTING_LONGITUDE}`;
 
+getPageInactiveState();
+
 const map = L.map('map-canvas')
   .on('load', () => {
     getPageActiveState();
+
   })
   .setView({
     lat: STARTING_LATITUDE,
@@ -62,7 +64,10 @@ const resetMainPinMarker = () => {
 const markerGroup = L.layerGroup().addTo(map);
 
 const addPoints = (points) => {
-  points.forEach((point) => {
+
+  const filtredPoints = points.slice();
+
+  filtredPoints.slice(0, 10).forEach((point) => {
     const {lat, lng} = point.location;
 
     const icon = L.icon({
@@ -87,12 +92,23 @@ const addPoints = (points) => {
   });
 };
 
+const removeMapMarkers = () => {
+  markers.forEach((marker) => {
+    marker.remove();
+  });
+};
+
 const closePopupMapMarkers = () => {
   markers.forEach((marker) => {
     marker.closePopup();
   });
 };
 
-export {addPoints, resetMainPinMarker, closePopupMapMarkers};
+export {
+  addPoints,
+  resetMainPinMarker,
+  closePopupMapMarkers,
+  removeMapMarkers
+};
 
 
