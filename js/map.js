@@ -1,5 +1,6 @@
 import {getPageActiveState, addAddRess, addressArea, getPageInactiveState} from './forms.js';
 import {createPopup} from './generate.js';
+
 const STARTING_LATITUDE = 35.6895;
 const STARTING_LONGITUDE = 139.6921;
 const ZOOM = 12;
