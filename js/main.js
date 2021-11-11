@@ -4,7 +4,7 @@ import './map.js';
 import './api.js';
 import './avatar.js';
 import {getData} from './api.js';
-import {addPoints, resetMainPinMarker, closePopupMapMarkers, removeMapMarkers} from './map.js';
+import {addPoints, resetMainPinMarker, closePopupMapMarkers, removeMapMarkers, removePoints} from './map.js';
 import {setUserFormSubmit, adForm, resetButton, onTypeOfHousingChange, onRoomsNumberSelect} from './forms.js';
 import {showError} from './utils/show-error.js';
 import {showSuccessPopup, showErrorPopup} from './popus.js';
@@ -22,6 +22,7 @@ const setDefaults = () => {
   closePopupMapMarkers();
   onTypeOfHousingChange();
   onRoomsNumberSelect();
+  removePoints();
   clearAvatar();
   clearPhoto();
 };
@@ -49,17 +50,18 @@ const getFilteredPoints = (points) => {
   };
 
   mapFiltres.addEventListener('change', debounce(addFiltres, RERENDER_DELAY));
+
+  setUserFormSubmit(() => {
+    showSuccessPopup();
+    setDefaults();
+    addPoints(points);
+  }, showErrorPopup);
+
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    setDefaults();
+    addPoints(points);
+  });
 };
 
 getData(GET_URL, getFilteredPoints, showError);
-
-
-setUserFormSubmit(() => {
-  showSuccessPopup();
-  setDefaults();
-}, showErrorPopup);
-
-resetButton.addEventListener('click', (evt) => {
-  evt.preventDefault();
-  setDefaults();
-});

@@ -74,7 +74,7 @@ const onPriceInput = () => {
 inputPrice.addEventListener('input', onPriceInput);
 
 // Валидация количества комнат и количества мест
-const RoomsForCapacities = {
+const roomsForCapacities = {
   1: [1],
   2: [1, 2],
   3: [1, 2, 3],
@@ -84,7 +84,7 @@ const RoomsForCapacities = {
 const onRoomsNumberSelect = () => {
   const variantCapacityOptions = capacitySelect.querySelectorAll('option');
   const roomsNumber =  Number(roomNumber.value);
-  const quantityCapacities = RoomsForCapacities[roomsNumber];
+  const quantityCapacities = roomsForCapacities[roomsNumber];
 
   variantCapacityOptions.forEach((option) => {
     option.disabled = true;

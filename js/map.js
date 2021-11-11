@@ -64,11 +64,11 @@ const resetMainPinMarker = () => {
 // Второстепенные маркеры и балун
 const markerGroup = L.layerGroup().addTo(map);
 
-const addPoints = (points) => {
+const onLoadFilteredPoints = (points) => {
+  const filteredPoints = points.slice();
 
-  const filtredPoints = points.slice();
+  filteredPoints.slice(0, 10).forEach((point) => {
 
-  filtredPoints.slice(0, 10).forEach((point) => {
     const {lat, lng} = point.location;
 
     const icon = L.icon({
@@ -105,11 +105,20 @@ const closePopupMapMarkers = () => {
   });
 };
 
+const addPoints = (points) => {
+  onLoadFilteredPoints(points);
+};
+
+const removePoints = () => {
+  markerGroup.clearLayers();
+};
+
 export {
   addPoints,
   resetMainPinMarker,
   closePopupMapMarkers,
-  removeMapMarkers
+  removeMapMarkers,
+  removePoints
 };
 
 
