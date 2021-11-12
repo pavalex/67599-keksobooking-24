@@ -18,7 +18,7 @@ avatarChooser.addEventListener('change', () => {
   }
 });
 
-const imgTag = document.createElement('img');
+const imgTagContainer = document.createElement('img');
 
 photoChooser.addEventListener('change', () => {
   const photo = photoChooser.files[0];
@@ -27,16 +27,16 @@ photoChooser.addEventListener('change', () => {
   const matches = FILE_TYPES.some((item) => photoName.endsWith(item));
 
   if (matches) {
-    imgTag.style.width = SIZE_PHOTO;
-    imgTag.style.height = SIZE_PHOTO;
-    imgTag.src = URL.createObjectURL(photo);
-    photoPreview.appendChild(imgTag);
+    imgTagContainer.style.width = SIZE_PHOTO;
+    imgTagContainer.style.height = SIZE_PHOTO;
+    imgTagContainer.src = URL.createObjectURL(photo);
+    photoPreview.appendChild(imgTagContainer);
   }
 });
 
 const clearAvatar = () => avatarPreview.src = AVATAR_DEFAULT;
 
-const clearPhoto = () => imgTag.remove();
+const clearPhoto = () => imgTagContainer.remove();
 
 export {
   clearAvatar,

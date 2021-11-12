@@ -8,7 +8,7 @@ import {addPoints, resetMainPinMarker, closePopupMapMarkers, removeMapMarkers, r
 import {setUserFormSubmit, adForm, resetButton, onTypeOfHousingChange, onRoomsNumberSelect} from './forms.js';
 import {showError} from './utils/show-error.js';
 import {showSuccessPopup, showErrorPopup} from './popus.js';
-import {mapFiltres, checkType, checkPrice, checkRooms, checkGuests, checkFeatures, activateFilter, deactivateFilter} from './filter.js';
+import {mapFilters, checkType, checkPrice, checkRooms, checkGuests, checkFeatures, activateFilter, deactivateFilter} from './filter.js';
 import {debounce} from './utils/debounce.js';
 import {clearAvatar, clearPhoto} from './avatar.js';
 
@@ -16,7 +16,7 @@ const GET_URL = 'https://24.javascript.pages.academy/keksobooking/data';
 const RERENDER_DELAY = 500;
 
 const setDefaults = () => {
-  mapFiltres.reset();
+  mapFilters.reset();
   adForm.reset();
   resetMainPinMarker();
   closePopupMapMarkers();
@@ -49,7 +49,7 @@ const getFilteredPoints = (points) => {
     addPoints(filteredPoints);
   };
 
-  mapFiltres.addEventListener('change', debounce(addFiltres, RERENDER_DELAY));
+  mapFilters.addEventListener('change', debounce(addFiltres, RERENDER_DELAY));
 
   setUserFormSubmit(() => {
     showSuccessPopup();

@@ -2,14 +2,14 @@ const DEFAULT_VALUE = 'any';
 const LOW_PRICE = 10000;
 const HIGH_PRICE = 50000;
 
-const mapFiltres = document.querySelector('.map__filters');
-const filterItems = mapFiltres.querySelectorAll('select, input, fieldset');
-const housingFeatures = mapFiltres.querySelector('#housing-features');
-const mapFiltresDisabled = mapFiltres.querySelectorAll('.map__filter');
+const mapFilters = document.querySelector('.map__filters');
+const filterItems = mapFilters.querySelectorAll('select, input, fieldset');
+const housingFeatures = mapFilters.querySelector('#housing-features');
+const mapFiltersDisabled = mapFilters.querySelectorAll('.map__filter');
 
 const activateFilter = () => {
-  mapFiltres.classList.remove('map__filters--disabled');
-  mapFiltresDisabled.forEach((mapFilterItem) => {
+  mapFilters.classList.remove('map__filters--disabled');
+  mapFiltersDisabled.forEach((mapFilterItem) => {
     mapFilterItem.removeAttribute('disabled');
   });
   filterItems.forEach((el) => {
@@ -18,8 +18,8 @@ const activateFilter = () => {
 };
 
 const deactivateFilter = () => {
-  mapFiltres.classList.add('map__filters--disabled');
-  mapFiltresDisabled.forEach((mapFilterItem) => {
+  mapFilters.classList.add('map__filters--disabled');
+  mapFiltersDisabled.forEach((mapFilterItem) => {
     mapFilterItem.setAttribute('disabled', true);
   });
   filterItems.forEach((el) => {
@@ -64,7 +64,7 @@ const checkFeatures = (point) => {
 export {
   activateFilter,
   deactivateFilter,
-  mapFiltres,
+  mapFilters,
   checkType,
   checkPrice,
   checkRooms,

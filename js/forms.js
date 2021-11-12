@@ -24,7 +24,7 @@ const addressArea = document.querySelector('#address');
 const getPageInactiveState = () => {
   adForm.classList.add('ad-form--disabled');
   fieldsetDisabled.forEach((fieldsetItem) => {
-    fieldsetItem.setAttribute('disabled', true);
+    fieldsetItem.setAttribute('disabled', '');
   });
 };
 
@@ -97,8 +97,7 @@ const onRoomsNumberSelect = () => {
       }
     });
     if (!quantityCapacities.includes(Number(capacitySelect.value))) {
-      const maxCapacity = quantityCapacities[quantityCapacities.length - 1];
-      capacitySelect.value = maxCapacity;
+      capacitySelect.value = quantityCapacities[quantityCapacities.length - 1];
     }
   });
 };
